@@ -77,14 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Phantom" },
+      { name: "description", content: "Phantom — anonymous two-person secure rooms." },
+      { name: "author", content: "Phantom" },
+      { property: "og:title", content: "Phantom" },
+      { property: "og:description", content: "Anonymous two-person secure rooms with hold-to-reveal messages." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -115,6 +114,36 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    const blur = () => document.body.classList.add("app-hidden");
+    const focus = () => document.body.classList.remove("app-hidden");
+    const onVis = () => {
+      if (document.visibilityState === "hidden") blur();
+      else focus();
+    };
+    const onKey = (e: KeyboardEvent) => {
+      // Best-effort: clear clipboard on PrintScreen
+      if (e.key === "PrintScreen") {
+        navigator.clipboard?.writeText("").catch(() => {});
+        blur();
+        setTimeout(focus, 1500);
+      }
+    };
+    const noCtx = (e: MouseEvent) => e.preventDefault();
+    window.addEventListener("blur", blur);
+    window.addEventListener("focus", focus);
+    document.addEventListener("visibilitychange", onVis);
+    window.addEventListener("keyup", onKey);
+    document.addEventListener("contextmenu", noCtx);
+    return () => {
+      window.removeEventListener("blur", blur);
+      window.removeEventListener("focus", focus);
+      document.removeEventListener("visibilitychange", onVis);
+      window.removeEventListener("keyup", onKey);
+      document.removeEventListener("contextmenu", noCtx);
+    };
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

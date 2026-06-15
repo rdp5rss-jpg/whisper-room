@@ -569,9 +569,20 @@ function MessageBubble({ msg, onReveal }: { msg: Msg; onReveal: (r: boolean) => 
           </p>
           {!msg.mine && !msg.revealed && (
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur px-2.5 py-1 rounded-full text-[11px] font-medium text-foreground shadow-sm">
-                <Eye className="w-3 h-3" /> Hold to reveal
-              </div>
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="reveal-pill flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold tracking-wide"
+              >
+                <motion.span
+                  animate={{ scale: [1, 1.15, 1], opacity: [0.85, 1, 0.85] }}
+                  transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+                  className="inline-flex"
+                >
+                  <Eye className="w-3 h-3" />
+                </motion.span>
+                <span className="shimmer-text">Hold to reveal</span>
+              </motion.div>
             </div>
           )}
         </div>
