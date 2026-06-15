@@ -6,9 +6,9 @@ import { Lock, KeyRound, Plus, MessageCircle, Sparkles } from "lucide-react";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Whisper · Secure Rooms" },
+      { title: "Phantom · Secure Rooms" },
       { name: "description", content: "Anonymous two-person encrypted chat rooms with hold-to-reveal messages and live calls." },
-      { property: "og:title", content: "Whisper · Secure Rooms" },
+      { property: "og:title", content: "Phantom · Secure Rooms" },
       { property: "og:description", content: "Anonymous two-person chat rooms with hold-to-reveal messages." },
     ],
   }),
@@ -60,7 +60,7 @@ function Landing() {
         className="flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full glass text-sm"
       >
         <Sparkles className="w-3.5 h-3.5 text-primary" />
-        <span className="text-muted-foreground">No login. No traces. Just two.</span>
+        <span className="text-muted-foreground">Phantom · No login. No traces. Just two.</span>
       </motion.div>
 
       <motion.h1
@@ -69,9 +69,9 @@ function Landing() {
         transition={{ delay: 0.1 }}
         className="text-6xl md:text-7xl font-display tracking-tight text-center leading-[1.05]"
       >
-        Whisper a <span className="shimmer-text italic">secret</span>
+        <span className="shimmer-text italic">Phantom</span>
         <br />
-        worth keeping.
+        conversations.
       </motion.h1>
 
       <motion.p

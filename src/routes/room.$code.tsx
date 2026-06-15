@@ -11,7 +11,7 @@ import {
 export const Route = createFileRoute("/room/$code")({
   head: ({ params }) => ({
     meta: [
-      { title: `Room ${params.code} · Whisper` },
+      { title: `Room ${params.code} · Phantom` },
       { name: "description", content: "Private secure chat room." },
     ],
   }),
